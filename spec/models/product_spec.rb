@@ -9,12 +9,13 @@ RSpec.describe Product, type: :model do
 
   it { is_expected.to have_attributes(title: title) }
   it { is_expected.to have_attributes(description: description) }
+  it { is_expected.to have_attributes(variants: variants) }
 
   context 'with a long description' do
     let(:description) { Faker::Lorem.characters(number: 301) }
 
     it 'raises a validation error' do
-      expect { product }.to raise_error ActiveRecord::RecordInvalid
+      expect { product }.to raise_error ActiveRecord::RecordInvalid, /Description is too long/
     end
   end
 
@@ -22,7 +23,7 @@ RSpec.describe Product, type: :model do
     let(:title) { '' }
 
     it 'raises a validation error' do
-      expect { product }.to raise_error ActiveRecord::RecordInvalid
+      expect { product }.to raise_error ActiveRecord::RecordInvalid, /Title can't be blank/
     end
   end
 
@@ -38,7 +39,7 @@ RSpec.describe Product, type: :model do
     let(:variants) { [] }
 
     it 'raises a validation error' do
-      expect { product }.to raise_error ActiveRecord::RecordInvalid
+      expect { product }.to raise_error ActiveRecord::RecordInvalid, /Variants can't be blank/
     end
   end
 end
