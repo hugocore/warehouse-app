@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   has_many :variants, dependent: :destroy
 
-  MAX_DESCRIPTION_LENGTH = 300.freeze
+  MAX_DESCRIPTION_LENGTH = 300
 
   validates :title, presence: true, uniqueness: true
   validates :description, length: { maximum: MAX_DESCRIPTION_LENGTH }, allow_blank: true

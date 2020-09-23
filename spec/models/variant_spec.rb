@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Variant, type: :model do
-  subject(:variant) { create :variant, product: product, sku: sku, quantity: quantity  }
+  subject(:variant) { create :variant, product: product, sku: sku, quantity: quantity }
 
   let(:product) { create :product }
   let(:sku) { 'BG-101' }
@@ -27,7 +27,7 @@ RSpec.describe Variant, type: :model do
   end
 
   context 'with an invalid quantity' do
-    let(:quantity) { "many" }
+    let(:quantity) { 'many' }
 
     it 'raises a validation error' do
       expect { variant }.to raise_error ActiveRecord::RecordInvalid, /Quantity is not a number/
@@ -35,7 +35,7 @@ RSpec.describe Variant, type: :model do
   end
 
   context 'without a quantity' do
-    let(:quantity) { }
+    let(:quantity) {}
 
     it 'raises a validation error' do
       expect { variant }.to raise_error ActiveRecord::RecordInvalid, /Quantity can't be blank/

@@ -31,7 +31,7 @@ RSpec.describe Product, type: :model do
     let(:description) { '' }
 
     it 'creates the product' do
-      expect { product }.to change(Product, :count).by(1)
+      expect { product }.to change(described_class, :count).by(1)
     end
   end
 
@@ -40,6 +40,14 @@ RSpec.describe Product, type: :model do
 
     it 'raises a validation error' do
       expect { product }.to raise_error ActiveRecord::RecordInvalid, /Variants can't be blank/
+    end
+  end
+
+  context 'with a duplicated product' do
+    before { create :product, title: title, description: description, variants: variants }
+
+    it 'raises a validation error' do
+      expect { product }.to raise_error ActiveRecord::RecordInvalid, /Title has already been taken/
     end
   end
 end
