@@ -11,4 +11,8 @@ class Product < ApplicationRecord
   validates :title, uniqueness: { conditions: -> { where(discarded_at: nil) } }
 
   accepts_nested_attributes_for :variants, allow_destroy: true
+
+  def stock_quantity
+    variants.sum(:quantity)
+  end
 end
