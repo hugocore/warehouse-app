@@ -1,2 +1,12 @@
-<h1>Homepage#show</h1>
-<p>Find me in app/views/homepage/show.html.erb</p>
+<h1>Products</h1>
+
+<table>
+  <% @products.each do |product| %>
+  <tr>
+    <td>
+      <p><%= product.title %></p>
+      <p><%= product.description %></p>
+    </td>
+  </tr>
+  <% end %>
+</table>
