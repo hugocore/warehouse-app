@@ -1,0 +1,45 @@
+<%= form_with(model: product, local: true) do |form| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+        <% product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <div>
+      <strong>
+        <%= form.label :title %>
+      </strong>
+    </div>
+    <%= form.text_field :title %>
+    <div>
+      <strong>
+        <%= form.label :description %>
+      </strong>
+    </div>
+    <span>max <%= Product::MAX_DESCRIPTION_LENGTH %> characters</span>
+    <div>
+      <%= form.text_field :description %>
+    </div>
+  </div>
+
+  <hr />
+
+  <h2>Variants</h2>
+
+  <div>
+    <%= form.fields_for :variants do |variant| %>
+      <%= render 'variant_fields', f: variant %>
+    <% end %>
+
+    <%= link_to_add_association 'Add Variant', form, :variants %>
+  </div>
+
+  <%= form.submit %>
+<% end %>
