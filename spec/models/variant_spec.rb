@@ -50,15 +50,15 @@ RSpec.describe Variant, type: :model do
     end
   end
 
- context 'when an old variant is soft deleted' do
+  context 'when an old variant is soft deleted' do
     before do
       old_variant = create :variant, product: product, sku: sku, quantity: quantity
 
       old_variant.discard!
     end
 
-    it 'does not raise a validation error' do
-      expect { variant }.not_to raise_error ActiveRecord::RecordInvalid, /Sku has already been taken/
+    it 'allows for a new variant to be created' do
+      expect { variant }.to change(described_class, :count).by(1)
     end
   end
 end

@@ -51,15 +51,15 @@ RSpec.describe Product, type: :model do
     end
   end
 
-  context 'when product is soft deleted' do
+  context 'when an old product is soft deleted' do
     before do
       old_product = create :product, title: title, description: description, variants: variants
 
       old_product.discard!
     end
 
-    it 'does not raise a validation error' do
-      expect { product }.not_to raise_error ActiveRecord::RecordInvalid, /Title has already been taken/
+    it 'allows for a new product to be created' do
+      expect { product }.to change(described_class, :count).by(1)
     end
   end
 end
