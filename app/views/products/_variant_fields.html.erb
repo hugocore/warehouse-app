@@ -1,0 +1,17 @@
+<div>
+  <%= f.hidden_field :id %>
+  <div>
+    <strong>
+      <%= f.label :sku %>
+    </strong>
+  </div>
+  <%= f.text_field :sku  %>
+  <div>
+    <strong>
+      <%= f.label :quantity %>
+    </strong>
+  </div>
+  <%= f.text_field :quantity %>
+  <%= f.check_box :_destroy %> Remove variant
+  <hr />
+</div>
