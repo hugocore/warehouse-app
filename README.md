@@ -3,7 +3,7 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/57d6a14eb1a0c0ee7248/test_coverage)](https://codeclimate.com/github/hugocore/warehouse-app/test_coverage)
 [![Coverage Status](https://coveralls.io/repos/github/hugocore/warehouse-app/badge.svg?branch=master)](https://coveralls.io/github/hugocore/warehouse-app?branch=master)
 
-# Skeleton - Code tests
+# Warehouse Management System
 
 A Warehouse Management System built using #Ruby and #Ruby on Rails.
 
@@ -68,41 +68,48 @@ https://codeclimate.com/github/hugocore/warehouse-app
 
 # The problem
 
-Let's build a software for adding products to a warehouse. The users of the software would be able to add/update/delete products with variants. Each product must have a title (required), description (optional and up to 300 characters) and variants (at least one). Variants have a unique SKU (string, no specific format) and stock quantity (required, integer, not negative).
-
-## Assumptions
-
-- TODO
+Let's build an app to manage products in a warehouse. The users of the software would be able to add/update/delete products with variants. Each product must have a title (required), description (optional and up to 300 characters) and variants (at least one). Variants have a unique SKU (string, no specific format) and stock quantity (required, integer, not negative).
 
 # Solution
 
+Straight out Rails MVC application with models (`Product`, `Variant`) to encapsulate business logic, controllers to prepare objects and serve views, and views to present data to the user.
 
-### Code
+## Requirements
 
-#### TODO
+The following requirements were all achieved.
 
-- TODO
+### Products
 
-#### Registry
+- List all products, latest on the top
+- Users should be able to navigate to a new product page, edit product page or delete a product by confirming the deletion.
 
-Perhaps one of the most important pieces of code is the `Container`. It keeps a registry
-of all the repositories and services, allowing these to be auto-injected into
-one another's. For instance:
+### Add product
 
-```ruby
-- TODO
-```
+- Creates new product with at least one variant
+- Add/remove variant buttons should only update the UI and should not persist the data
 
-Thus, we can compose objects together and decouple them from actual implementations.
-It's also particularly useful when testing because it allows dependencies to be
-stubbed in specs, preventing things like hitting databases or raising errors.
+### Edit product
+
+- Updates product and its variants
+- Add/remove variant buttons should only update the UI and should not persist the data
+
+### Non-Functional Requirements
+
+- Rails app
+- Persist data in PostgreSQL
+- Product and variants should be soft deleted. Deleted product and variants are not displayed anywhere in the app.
+- Adding/updating/removing variants should happen inline when creating/updating the product
+- No need of fancy or responsive design but the implementation should roughly match the wireframe
+- Tests (no need of 100% coverage)
 
 # Improvements
 
-- TODO
+- The UI code could eventually be moved into its own project
+- A Javascript library (e.g. React) could be used here to avoid Rails views and make the code a bit more manageable and clean
+- The logic that updates products and their variants could be moved into a Service Object, one that could validate data, apply the changes in a transaction and so on. Given that at this point, the update is so simple that Rails is doing all this inline, I decided to keep it simple until further notice
 
 # Review
 
-Take a look these pages to review this work:
+Take a look at these pages to review this work:
 
-- https://github.com/hugocore/warehouse-app/pulls
+- https://github.com/hugocore/warehouse-app/pulls?q=is%3Apr+is%3Aclosed
