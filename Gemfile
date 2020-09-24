@@ -12,6 +12,9 @@ gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 
+# Others
+gem 'discard', '~> 1.2'
+
 group :development, :test do
   gem 'coveralls', '~> 0.8'
   gem 'dotenv-rails'
@@ -32,6 +35,7 @@ end
 
 group :test do
   gem 'factory_bot_rails'
+  gem 'faker'
   gem 'rspec-rails'
   gem 'rubocop-rspec', require: false
   gem 'simplecov'

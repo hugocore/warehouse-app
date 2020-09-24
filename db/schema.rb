@@ -10,9 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2020_09_23_193733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "products", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.datetime "discarded_at"
+    t.index ["discarded_at", "title"], name: "index_products_on_discarded_at_and_title"
+    t.index ["discarded_at"], name: "index_products_on_discarded_at"
+  end
+
+  create_table "variants", force: :cascade do |t|
+    t.string "sku"
+    t.integer "quantity"
+    t.bigint "product_id", null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at", "sku"], name: "index_variants_on_discarded_at_and_sku"
+    t.index ["discarded_at"], name: "index_variants_on_discarded_at"
+    t.index ["product_id"], name: "index_variants_on_product_id"
+  end
+
+  add_foreign_key "variants", "products"
 end
