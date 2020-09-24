@@ -14,6 +14,8 @@ gem 'sass-rails', '>= 6'
 
 # Others
 gem 'discard', '~> 1.2'
+gem 'cocoon', '~> 1.2'
+gem 'jquery-rails', '~> 4.4'
 
 group :development, :test do
   gem 'coveralls', '~> 0.8'
