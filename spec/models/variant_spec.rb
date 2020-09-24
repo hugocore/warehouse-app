@@ -49,4 +49,16 @@ RSpec.describe Variant, type: :model do
       expect { variant }.to raise_error ActiveRecord::RecordInvalid, /Sku has already been taken/
     end
   end
+
+ context 'when an old variant is soft deleted' do
+    before do
+      old_variant = create :variant, product: product, sku: sku, quantity: quantity
+
+      old_variant.discard!
+    end
+
+    it 'does not raise a validation error' do
+      expect { variant }.not_to raise_error ActiveRecord::RecordInvalid, /Sku has already been taken/
+    end
+  end
 end
