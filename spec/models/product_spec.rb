@@ -50,4 +50,16 @@ RSpec.describe Product, type: :model do
       expect { product }.to raise_error ActiveRecord::RecordInvalid, /Title has already been taken/
     end
   end
+
+  context 'when product is soft deleted' do
+    before do
+      old_product = create :product, title: title, description: description, variants: variants
+
+      old_product.discard!
+    end
+
+    it 'does not raise a validation error' do
+      expect { product }.not_to raise_error ActiveRecord::RecordInvalid, /Title has already been taken/
+    end
+  end
 end
