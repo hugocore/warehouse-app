@@ -62,4 +62,14 @@ RSpec.describe Product, type: :model do
       expect { product }.to change(described_class, :count).by(1)
     end
   end
+
+  describe '#stock_quantity' do
+    let(:variant1) { build :variant, quantity: 5 }
+    let(:variant2) { build :variant, quantity: 5 }
+    let(:variants) { [variant1, variant2] }
+
+    it 'returns the sum of all the variants' do
+      expect(product.stock_quantity).to eq(10)
+    end
+  end
 end
